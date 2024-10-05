@@ -1,7 +1,11 @@
+import { PaperProvider } from "react-native-paper";
 import AppNavigation from "./src/navigation/appNavigation";
 
 export default function App() {
   return(
-    <AppNavigation></AppNavigation>
+    <PaperProvider>
+      <AppNavigation></AppNavigation>
+    </PaperProvider>
+    
   );
 }
