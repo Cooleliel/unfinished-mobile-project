@@ -12,7 +12,7 @@ function SignUpScreen() {
     return(
         <SafeAreaView style={{flex: 1, backgroundColor: '#f5f5f5', padding: 50}}>
             <View style={{flex: 0.3}}>
-                <Text variant="displayMedium" style={{color: '#2E8B57', fontWeight: 'bold'}}>
+                <Text variant="displaySmall" style={{color: '#2E8B57', fontWeight: 'bold'}}>
                     Akwaba sur
                 </Text>
                 <Image source={require('../../assets/images/sangimmo.webp')} style={{width: 200, height: 45, marginBottom: 20}} resizeMode="contain"/>
