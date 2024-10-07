@@ -93,6 +93,10 @@ Voici un aperçu de la structure des dossiers du projet :
   <img src="src/assets/overview/RemovePasswordScreen.png" alt="Écran de reinitialisation de mot de passe" width="300">
 </p>
 
+<p align="center">
+  <img src="src/assets/overview/CheckScreen.png" alt="Écran de verification" width="300">
+</p>
+
 ## Dépannage
 
 Si vous rencontrez des problèmes, consultez le [Guide de dépannage React Native](https://reactnative.dev/docs/troubleshooting).
