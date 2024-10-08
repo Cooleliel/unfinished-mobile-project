@@ -77,15 +77,32 @@ function DetailModeScreen() {
                             }
                             ]}
                         >
-
-                            <Text 
+                            <View 
                                 style={{
-                                    fontWeight: 'bold'
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center'
                                 }}
-                                variant="titleMedium"
                             >
-                                Immeuble BOGO / BOBO DSS | BF
-                            </Text>
+                                <Text 
+                                    style={{
+                                        fontWeight: 'bold'
+                                    }}
+                                    variant="titleMedium"
+                                >
+                                    Immeuble BOGO / BOBO DSS | BF
+                                </Text >
+                                <Text
+                                    variant="bodySmall"
+                                    style={{
+                                        color: '#2E8B57',
+                                        fontWeight: 'bold'
+                                    }}
+                                >
+                                    Disponible
+                                </Text>
+                            </View>
 
                             <View>
                                 <Text 
