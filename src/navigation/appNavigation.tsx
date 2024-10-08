@@ -5,14 +5,15 @@ import SignUpScreen from '../screens/signup/SignUpScreen';
 import RemovePasswordScreen from '../screens/removepassword/RemovePasswordScreen';
 import CheckScreen from '../screens/check/CheckScreen';
 import DetailModeScreen from '../screens/detailmode/DetailMode';
+import DetailTontineScreen from '../screens/detailtontine/DetailTontine';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='DetailMode' screenOptions={{headerShown: false}}>
-                <Stack.Screen name='DetailMode' component={DetailModeScreen}/>
+            <Stack.Navigator initialRouteName='DetailTontine' screenOptions={{headerShown: false}}>
+                <Stack.Screen name='DetailTontine' component={DetailTontineScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
