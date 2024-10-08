@@ -19,7 +19,7 @@ function SignInScreen() {
             <ImageBackground
                 source={require('../../assets/images/login.jpeg')}
                 style={{flex: 1 }}
-                imageStyle={{resizeMode: 'contain', top: -350}}
+                imageStyle={{resizeMode: 'contain', top: '-45%'}}
             >
                 <View style={styles.container}>
                     <View style={styles.screentitleContainer}>

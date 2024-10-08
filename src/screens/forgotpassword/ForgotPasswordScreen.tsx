@@ -55,7 +55,7 @@ function ForgotPasswordScreen() {
                                 mode="contained" 
                                 buttonColor="#2E8B57"
                                 textColor="#fff"
-                                style={{borderRadius: 10, height: 50, justifyContent: 'center'}}
+                                style={{borderRadius: 10, height: 50, display: 'flex', justifyContent: 'center'}}
                                 labelStyle={{fontWeight: 'bold'}}
                                 onPress={() => console.log("Recevoir le code")}
                             >
