@@ -40,7 +40,7 @@ function DetailTontineScreen() {
                             styles.subContainer, 
                             {
                                 flex: 0.9, 
-                                backgroundColor: '#ffffff', 
+                                backgroundColor: '#FCFCFC', 
                                 paddingTop: 10, 
                                 paddingHorizontal: 40,
                                 display: 'flex',
@@ -151,9 +151,6 @@ function DetailTontineScreen() {
                                 justifyContent: 'space-around',
                                 width: '100%',
                                 height: '15%',
-                                borderTopWidth: 2,
-                                borderTopColor: '#f1f1f1',
-                                elevation: 2,
                                 paddingHorizontal: 30
                             }}
                         >
