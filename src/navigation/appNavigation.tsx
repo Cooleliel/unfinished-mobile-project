@@ -4,16 +4,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen from '../screens/signup/SignUpScreen';
 import RemovePasswordScreen from '../screens/removepassword/RemovePasswordScreen';
 import CheckScreen from '../screens/check/CheckScreen';
-import DetailModeScreen from '../screens/detailmode/DetailMode';
-import DetailTontineScreen from '../screens/detailtontine/DetailTontine';
+import DetailModeScreen from '../screens/detailmode/DetailModeScreen';
+import DetailTontineScreen from '../screens/detailtontine/DetailTontineScreen';
+import DetailMaTontineScreen from '../screens/detailmatontine/DetailMaTontineScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='DetailTontine' screenOptions={{headerShown: false}}>
-                <Stack.Screen name='DetailTontine' component={DetailTontineScreen}/>
+            <Stack.Navigator initialRouteName='DetailMaTontine' screenOptions={{headerShown: false}}>
+                <Stack.Screen name='DetailMaTontine' component={DetailMaTontineScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
