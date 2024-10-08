@@ -8,14 +8,15 @@ import DetailModeScreen from '../screens/detailmode/DetailModeScreen';
 import DetailTontineScreen from '../screens/detailtontine/DetailTontineScreen';
 import DetailMaTontineScreen from '../screens/detailmatontine/DetailMaTontineScreen';
 import ConfirmationTontineScreen from '../screens/confirmationtontine/ConfirmationTontineScreen';
+import SettingsScreen from '../screens/settings/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='ConfirmationTontine' screenOptions={{headerShown: false}}>
-                <Stack.Screen name='ConfirmationTontine' component={ConfirmationTontineScreen}/>
+            <Stack.Navigator initialRouteName='Settings' screenOptions={{headerShown: false}}>
+                <Stack.Screen name='Settings' component={SettingsScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
