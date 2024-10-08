@@ -7,14 +7,15 @@ import CheckScreen from '../screens/check/CheckScreen';
 import DetailModeScreen from '../screens/detailmode/DetailModeScreen';
 import DetailTontineScreen from '../screens/detailtontine/DetailTontineScreen';
 import DetailMaTontineScreen from '../screens/detailmatontine/DetailMaTontineScreen';
+import ConfirmationTontineScreen from '../screens/confirmationtontine/ConfirmationTontineScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='DetailMaTontine' screenOptions={{headerShown: false}}>
-                <Stack.Screen name='DetailMaTontine' component={DetailMaTontineScreen}/>
+            <Stack.Navigator initialRouteName='ConfirmationTontine' screenOptions={{headerShown: false}}>
+                <Stack.Screen name='ConfirmationTontine' component={ConfirmationTontineScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

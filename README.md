@@ -109,6 +109,11 @@ Voici un aperçu de la structure des dossiers du projet :
   <img src="src/assets/overview/DetailMaTontineScreen.png" alt="Écran de Details de ma Tontine" width="300">
 </p>
 
+<p align="center">
+  <img src="src/assets/overview/ConfirmationTontineScreen.png" alt="Écran de Confirmation de la Tontine" width="300">
+</p>
+
+
 ## Dépannage
 
 Si vous rencontrez des problèmes, consultez le [Guide de dépannage React Native](https://reactnative.dev/docs/troubleshooting).
