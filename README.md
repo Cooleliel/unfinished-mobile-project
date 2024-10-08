@@ -113,6 +113,10 @@ Voici un aperçu de la structure des dossiers du projet :
   <img src="src/assets/overview/ConfirmationTontineScreen.png" alt="Écran de Confirmation de la Tontine" width="300">
 </p>
 
+<p align="center">
+  <img src="src/assets/overview/SettingsScreen.png" alt="Écran de Parametres de l'application" width="300">
+</p>
+
 
 ## Dépannage
 
