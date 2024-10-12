@@ -12,14 +12,15 @@ import SettingsScreen from '../screens/settings/SettingsScreen';
 import TontineScreen from '../screens/tontine/OffersTontineScreen';
 import TontineTopTabComponent from '../components/tontinetoptab/TontineTopTabComponent';
 import TontinePageScreen from '../screens/tontine/TontinePageScreen';
+import HomeScreen from '../screens/home/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigation() {
     return(
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='TontinePage' screenOptions={{headerShown: false}}>
-                <Stack.Screen name='TontinePage' component={TontinePageScreen}/>
+            <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+                <Stack.Screen name='Home' component={HomeScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
