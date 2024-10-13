@@ -24,6 +24,9 @@ const DATA: DataProps[] = [
     {   name: 'Immeuble Bogo5',  town: 'Bobo-Dioulasso', price: '120 000 FCFA / Mois'},
     {   name: 'Immeuble Bogo6',  town: 'Bobo-Dioulasso', price: '120 000 FCFA / Mois'},
     {   name: 'Immeuble Bogo7',  town: 'Bobo-Dioulasso', price: '120 000 FCFA / Mois'},
+    {   name: 'Immeuble Bogo8',  town: 'Bobo-Dioulasso', price: '120 000 FCFA / Mois'},
+    {   name: 'Immeuble Bogo9',  town: 'Bobo-Dioulasso', price: '120 000 FCFA / Mois'},
+    {   name: 'Immeuble Bogo10',  town: 'Bobo-Dioulasso', price: '120 000 FCFA / Mois'},
 ];
 
 const   renderImageCard = () => (
@@ -61,7 +64,6 @@ const   renderImageCard = () => (
             <View>
                 <Text
                     style={{
-
                         fontWeight: 'bold',
                     }}
                     variant="bodyLarge"
@@ -72,18 +74,12 @@ const   renderImageCard = () => (
                 <Text variant="bodyMedium" style={{fontWeight: 'bold'}}>120 000 FCFA / Mois</Text>
             </View>
             
-            <View
-                
-            >
-                
+            <View>
                 <Button
                     mode="text"
                     labelStyle={{
                         color: '#ffffff',
                         fontWeight: 'bold'
-                    }}
-                    contentStyle={{
-                        
                     }}
                     style={{
                         backgroundColor: '#2E8B57',
@@ -92,7 +88,6 @@ const   renderImageCard = () => (
                 >
                     Voir
                 </Button>
-                
             </View>
         </View>
     </View>

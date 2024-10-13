@@ -56,6 +56,7 @@ const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, na
 
         return (
             <Pressable
+                key={item.key}
                 accessibilityRole="button"
                 accessibilityState={isFocused ? { selected: true } : {}}
                 accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -112,7 +113,7 @@ const DynamicTopTabComponent: React.FC<{ tabs: TabData[] }> = ({ tabs }) => {
 };
 
 function HomeTopTabComponent() {
-    const tabs = [
+    const tabs: TabData[] = [
         { name: 'Ecran 1', label: 'Immeubles', iconName: 'camera' },
         { name: 'Ecran 2', label: 'Residences', iconName: 'camera' },
         { name: 'Ecran 3', label: 'Hotels', iconName: 'camera' },

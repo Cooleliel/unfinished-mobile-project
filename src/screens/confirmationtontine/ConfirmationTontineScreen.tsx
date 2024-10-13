@@ -42,7 +42,6 @@ function ConfirmationTontineScreen() {
                                 paddingTop: 30, 
                                 paddingHorizontal: 40,
                                 display: 'flex',
-                                                    
                             }
                             ]}
                         >

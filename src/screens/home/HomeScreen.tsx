@@ -89,7 +89,7 @@ function HomeScreen() {
                     source={require('../../assets/images/banner.jpg')} 
                     style={{
                         width: '100%',
-                        height: 200 
+                        height: 225 
                     }} 
                     resizeMode="cover"
                 />
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        top: '36%',
+        top: '45%',
         zIndex: 5
     }
 });
