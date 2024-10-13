@@ -125,6 +125,10 @@ Voici un aperçu de la structure des dossiers du projet :
   <img src="src/assets/overview/HomeScreen.png" alt="Écran d'accueil" width="300">
 </p>
 
+<p align="center">
+  <img src="src/assets/overview/HistoricsScreen.png" alt="Écran historiques" width="300">
+</p>
+
 ## Dépannage
 
 Si vous rencontrez des problèmes, consultez le [Guide de dépannage React Native](https://reactnative.dev/docs/troubleshooting).

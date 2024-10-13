@@ -34,7 +34,7 @@ const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, na
 
                 return (
                     <Pressable
-                        key={index}
+                        key={route.key}
                         accessibilityRole="button"
                         accessibilityState={isFocused ? { selected: true } : {}}
                         accessibilityLabel={options.tabBarAccessibilityLabel}

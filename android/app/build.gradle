@@ -117,3 +117,6 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+//Pour React Native pur, vous devez configurer manuellement react-native-vector-icons.
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
