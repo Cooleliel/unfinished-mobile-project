@@ -3,7 +3,7 @@ import { Image, StyleSheet, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-function RemovePasswordScreen() {
+function ResetPasswordScreen() {
     return(
         <SafeAreaView style={{flex: 1, backgroundColor: '#f5f5f5', padding: 50}}>
             <View style={{flex: 0.3}}>
@@ -142,7 +142,7 @@ function RemovePasswordScreen() {
     );
 }
 
-export  default RemovePasswordScreen;
+export  default ResetPasswordScreen;
 
 const styles = StyleSheet.create({
     inputCommonStyles: {
