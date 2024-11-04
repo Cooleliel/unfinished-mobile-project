@@ -6,14 +6,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Brand } from '../../components/brand';
 import { COLORS } from '../../constants/themes';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation} from '@react-navigation/native';
-
+import { useNavigation } from '@react-navigation/native';
 
 // Définition des types pour la navigation
 type RootStackParamList = {
     OnBoarding: undefined;
     BottomTab: undefined;
-    SignIn: undefined
+    SignIn: undefined;
 };
 
 // Création d'un type spécifique pour la navigation Native Stack
@@ -22,27 +21,40 @@ type OnBoardingNavigationProp = NativeStackNavigationProp<
     'OnBoarding'
 >;
 
+// Obtenir les dimensions initiales de l'écran
 const { width, height } = Dimensions.get('window');
 
 function OnBoarding() {
-
-     // Utilisation du type spécifique pour la navigation
+    // Utilisation du type spécifique pour la navigation
     const navigation = useNavigation<OnBoardingNavigationProp>();
-
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     // Créer deux valeurs d'animation pour les cercles
     const topCircleOpacity = useRef(new Animated.Value(0)).current;
     const bottomCircleOpacity = useRef(new Animated.Value(0)).current;
 
+    // Détecter les changements de dimension et mettre à jour en conséquence
+    const [screenDimensions, setScreenDimensions] = useState({ width, height });
+
+    useEffect(() => {
+        // Fonction pour gérer la mise à jour des dimensions
+        const onChange = ({ window: { width, height } }: { window: any }) => {
+            setScreenDimensions({ width, height });
+        };
+
+        const subscription = Dimensions.addEventListener('change', onChange);
+
+        // Nettoyage de l'event listener
+        return () => subscription.remove();
+    }, []);
+
     useEffect(() => {
         // Attendre 2 secondes avant de démarrer l'animation
         const timer = setTimeout(() => {
-            // Animation des cercles
             Animated.parallel([
                 Animated.timing(topCircleOpacity, {
                     toValue: 1,
-                    duration: 1000, // 1 seconde pour l'animation
+                    duration: 1000,
                     useNativeDriver: true,
                 }),
                 Animated.timing(bottomCircleOpacity, {
@@ -51,52 +63,47 @@ function OnBoarding() {
                     useNativeDriver: true,
                 }),
             ]).start();
-        }, 2000); // Délai de 2 secondes
+        }, 2000);
 
-        // Nettoyage
         return () => clearTimeout(timer);
     }, []);
 
     useEffect(() => {
-        // Timer pour la navigation
         const navigationTimer = setTimeout(() => {
-            isLoggedIn 
-                ? navigation.replace('BottomTab') 
-                : navigation.replace('SignIn');
-        }, 4000); // 4000ms = 2s pour le délai initial + 2s après l'animation
+            isLoggedIn ? navigation.replace('BottomTab') : navigation.replace('SignIn');
+        }, 4000);
 
-        // Nettoyage du timers
         return () => {
             clearTimeout(navigationTimer);
         };
-    }, [navigation])
+    }, [navigation]);
 
     return (
         <SafeAreaView style={baseStyles.container}>
             <View style={[baseStyles.container, baseStyles.flexCenter]}>
-                <Animated.View 
+                <Animated.View
                     style={[
-                        styles.circle, 
+                        styles.circle,
                         {
-                            top: '-15%', 
-                            left: '-25%', 
-                            width: width * 0.7, 
-                            height: width * 0.7,
+                            top: '-15%',
+                            left: '-25%',
+                            width: screenDimensions.width * 0.7,
+                            height: screenDimensions.width * 0.7,
                             opacity: topCircleOpacity,
-                        }
+                        },
                     ]}
                 />
-                <Brand/>
-                <Animated.View 
+                <Brand />
+                <Animated.View
                     style={[
-                        styles.circle, 
+                        styles.circle,
                         {
-                            bottom: '-15%', 
-                            right: '-25%', 
-                            width: width * 0.7, 
-                            height: width * 0.7,
+                            bottom: '-15%',
+                            right: '-25%',
+                            width: screenDimensions.width * 0.7,
+                            height: screenDimensions.width * 0.7,
                             opacity: bottomCircleOpacity,
-                        }
+                        },
                     ]}
                 />
             </View>
@@ -108,9 +115,9 @@ export default OnBoarding;
 
 const styles = StyleSheet.create({
     circle: {
-        padding: 50, 
+        padding: 50,
         borderRadius: 999,
         backgroundColor: COLORS.primary,
-        position: 'absolute'
-    }
+        position: 'absolute',
+    },
 });

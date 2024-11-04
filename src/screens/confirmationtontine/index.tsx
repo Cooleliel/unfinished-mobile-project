@@ -1,8 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
-import { Button, IconButton, Text, TextInput } from "react-native-paper";
+import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { CustomContainedButton } from "../../components/customButton";
 import { CustomTextInput } from "../../components/customTextInput";
 import { COLORS, FONTS, LAYOUT } from "../../constants/themes";
@@ -114,7 +113,7 @@ function ConfirmationTontine() {
                                                 alignItems: 'center'
                                             }]}
                                         >
-                                            <Icon name="" size={30}/>
+                                            <Icon source="account" size={30}/>
                                             <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 places</Text>
                                         </View>
                                         <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 000 / Mois</Text>
