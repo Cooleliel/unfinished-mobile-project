@@ -1,8 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
-import { Button, IconButton, Text, TextInput } from "react-native-paper";
+import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS } from "../../constants/themes";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -137,19 +136,19 @@ function DetailTontine() {
                                             alignItems: 'center'
                                         }}
                                     >
-                                        <Icon name="account" size={20} color={COLORS.primary}/>
+                                        <Icon source="account" size={20} color={COLORS.primary}/>
                                         <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 places</Text>
                                     </View>
                                     <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 000 / Mois</Text>
                                 </View>
 
                                 <View style={{display: 'flex', flexDirection: 'row', columnGap: 15, alignItems: 'center'}}>
-                                    <Icon name="book-open-variant" size={20} color={COLORS.primary}/>
+                                    <Icon source="book-open-variant" size={20} color={COLORS.primary}/>
                                     <Text variant="bodyMedium" style={{textAlign: "justify"}}>Cliquez ici pour voir les conditions</Text>    
                                 </View>
 
                                 <View style={{display: 'flex', flexDirection: 'row', columnGap: 15, alignItems: 'center'}}>
-                                    <Icon name="map" size={20} color={COLORS.primary}/>
+                                    <Icon source="map" size={20} color={COLORS.primary}/>
                                     <Text variant="bodyMedium" style={{textAlign: "justify"}}>BOBO 2010 en face de NIBA TIC 300m Mosquee de Hadja</Text>    
                                 </View>
                                 

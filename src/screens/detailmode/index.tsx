@@ -1,8 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
-import { Button, IconButton, Text, TextInput } from "react-native-paper";
+import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { COLORS } from "../../constants/themes";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -146,7 +145,7 @@ function DetailMode() {
                                     Adresse
                                 </Text>
                                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', columnGap: 20}}>
-                                    <Icon name="map" size={20} color={COLORS.primary}/>
+                                    <Icon source="map" size={20} color={COLORS.primary}/>
                                     <Text variant="bodyMedium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</Text>
                                 </View>
                                 <View style={{display: 'flex'}}>

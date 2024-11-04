@@ -1,8 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
-import { Button, IconButton, Text, TextInput } from "react-native-paper";
+import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLORS } from "../../constants/themes";
 import { useNavigation } from "@react-navigation/native";
 
@@ -156,7 +155,7 @@ function DetailMaTontine() {
                                                 alignItems: 'center'
                                             }}
                                         >
-                                            <Icon name="camera" size={20}/>
+                                            <Icon source="account" size={20}/>
                                             <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 places</Text>
                                         </View>
                                         <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 000 / Mois</Text>
