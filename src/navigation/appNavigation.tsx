@@ -14,6 +14,7 @@ import Congratulations from '../screens/congratulations';
 import ConfirmationTontine from '../screens/confirmationtontine';
 import Check from '../screens/check';
 import DetailMaTontine from '../screens/detailmatontine';
+import Profile from '../screens/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ export default function AppNavigation() {
                     <Stack.Screen name='ConfirmationTontine' component={ConfirmationTontine}/>
                     <Stack.Screen name='Check' component={Check}/>
                     <Stack.Screen name='DetailMaTontine' component={DetailMaTontine}/>
+                    <Stack.Screen name='Profile' component={Profile}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </SafeAreaProvider>

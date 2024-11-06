@@ -1,12 +1,13 @@
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { Text } from 'react-native-paper';
-import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+import { FlatList, Pressable, ScaledSize, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import GenericScreen from '../generics';
 import { useCallback } from 'react';
 import { Route } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Generic from '../generics';
+import { baseStyles } from '../../styles/baseStyles';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -27,6 +28,14 @@ interface RenderItemProps {
 }
 
 const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, navigation }) => {
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+    
     const renderItem = useCallback(({ item, index }: RenderItemProps) => {
         const { options } = descriptors[item.key];
         const label = options.tabBarLabel || options.title || item.name;
@@ -50,20 +59,25 @@ const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, na
 
         const IconComponent = options.tabBarIcon ? 
             options.tabBarIcon({ focused: isFocused, color: iconColor }) :
-            <Icon name="ios-information-circle" size={24} color={iconColor} />;
+            <Icon name="ios-information-circle" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} color={iconColor} />;
 
         return (
             <Pressable
                 key={item.key}
                 onPress={onPress}
-                style={[styles.tab, tabStyle]}
+                style={[baseStyles.flexRow, baseStyles.flexCenter, styles.tab, tabStyle, {
+                    width: isSmallMobile ? width/3 : isMediumMobile ? width/2.2 : isLargeMobile ? height/2 : height/1.8,
+                    height: isSmallMobile ? height/16.5 : isMediumMobile ? height/17 : isLargeMobile ? height/19 : height/21,
+                    paddingHorizontal: 10, 
+                    borderRadius: 12,
+                }]}
                 accessibilityRole="button"
                 accessibilityState={isFocused ? { selected: true } : {}}
                 accessibilityLabel={options.tabBarAccessibilityLabel}
                 testID={options.tabBarTestID}
             >
                 {IconComponent}
-                <Text style={textStyle}>
+                <Text style={[textStyle, {fontSize: isSmallMobile ? 10 : 16}]}>
                     {label as string}
                 </Text>
             </Pressable>
@@ -86,6 +100,14 @@ const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, na
 };
 
 const DynamicTopTab: React.FC<{ tabs: TabData[] }> = ({ tabs }) => {
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+    
     return (
         <Tab.Navigator
             initialRouteName={tabs[0].name}
@@ -98,7 +120,7 @@ const DynamicTopTab: React.FC<{ tabs: TabData[] }> = ({ tabs }) => {
                     options={{
                         tabBarLabel: tab.label,
                         tabBarIcon: ({ focused, color }: TabBarIconProps) => (
-                            <Icon name={tab.iconName} color={color} size={24} style={styles.icon} />
+                            <Icon name={tab.iconName} color={color} size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} style={styles.icon} />
                         ),
                     }}
                 >
@@ -130,21 +152,13 @@ const styles = StyleSheet.create({
 
     },
     tabBarContent: {
-        marginTop: 50,
-        marginBottom: 20,
+        marginTop: 30,
+        marginBottom: 10,
         paddingVertical: 5,
         paddingHorizontal: 10,
 
     },
     tab: {
-        width: 150,
-        height: 45,
-        display: 'flex', 
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingHorizontal: 10,
-        borderRadius: 12,
         marginHorizontal: 15,
         elevation: 3,
         shadowColor: "#000",

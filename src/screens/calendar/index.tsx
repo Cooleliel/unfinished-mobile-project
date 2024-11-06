@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Image, View } from "react-native";
+import { FlatList, Image, ScaledSize, useWindowDimensions, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CalendarStrip from 'react-native-calendar-strip';
@@ -36,6 +36,13 @@ const DATA: DataProps[] = [
 
 function Calendar() {
 
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+
     const navigation = useNavigation<CalendarNavigationProp>();
 
     const renderReservationCard = () => (
@@ -45,8 +52,8 @@ function Calendar() {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                columnGap: 10,
-                padding: 10,
+                columnGap: isSmallMobile ? 5 : 10,
+                padding: isSmallMobile ? 5 : 10,
                 borderRadius: 8,
                 elevation: 3,
                 shadowColor: '#d3d3d3'
@@ -55,15 +62,15 @@ function Calendar() {
             <Image
                 source={require('../../assets/images/login.jpeg')}
                 style={{
-                    width: 80,
-                    height: 80,
+                    width: isSmallMobile ? width/5 : isMediumMobile ? width/3.5 : isLargeMobile ? width/3 : width/2.5,
+                    height: isSmallMobile ? height/9 : isMediumMobile ? height/9 : isLargeMobile ? height/8 : height/7,
                     borderRadius: 16
                 }}
                 resizeMode="cover"
             />
-            <View style={{padding: 5}}>
+            <View style={{padding: isSmallMobile ? 3 : 5}}>
                 <Text
-                    variant="bodyLarge"
+                    variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'}
                     style={{
                         fontWeight: 'bold'
                     }}
@@ -71,7 +78,7 @@ function Calendar() {
                     Residence Meublee
                 </Text>
     
-                <Text>
+                <Text variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}>
                     2 plateaux d'abidjan
                 </Text>
                 <View
@@ -79,12 +86,13 @@ function Calendar() {
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        marginTop: 20,
-                        columnGap: 40,
-                        padding: 5 
+                        marginTop: isSmallMobile ? 10 : 20,
+                        columnGap: isSmallMobile ? 20 : 40,
+                        padding: isSmallMobile ? 3 : 5 
                     }}
                 >
                     <Text
+                        variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                         style={{
                             color: '#a3a3a3'
                         }}
@@ -95,11 +103,13 @@ function Calendar() {
                         mode="text"
                         style={{
                             backgroundColor: '#2E8B57',
-                            borderRadius: 8
+                            borderRadius: 8,
+                            height: isSmallMobile ? height/16 : isMediumMobile ? height/22 : isLargeMobile ? height/24 : height/26
                         }}
                         labelStyle={{
                             color: '#ffffff',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            fontSize: isSmallMobile ? 11 : isMediumMobile ? 16 : isLargeMobile ? 18 : 22
                         }}
                         onPress={()=> navigation.navigate('DetailMode')}
                     >
@@ -121,7 +131,11 @@ function Calendar() {
             
             <CalendarStrip
                 updateWeek={true}
-                style={{height:200, paddingTop: 20, paddingBottom: 10}}
+                style={{
+                    height:isSmallMobile ? height/6.5 : isMediumMobile ? height/6 : isLargeMobile ? height/5.5 : height/5, 
+                    paddingTop: isSmallMobile ? 10 : 20, 
+                    paddingBottom: isSmallMobile ? 5 : 10
+                }}
                 calendarColor={'#2E8B57'}
                 calendarHeaderStyle={{color: 'white'}}
                 dateNumberStyle={{color: 'white'}}
@@ -134,7 +148,7 @@ function Calendar() {
                 keyExtractor={(item) => item.name}
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{
-                    marginHorizontal: 10
+                    marginHorizontal: isSmallMobile ? 5 : 10
                 }}
             />
         </SafeAreaView>

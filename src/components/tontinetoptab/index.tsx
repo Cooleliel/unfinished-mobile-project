@@ -1,15 +1,24 @@
 import { createMaterialTopTabNavigator, MaterialTopTabBarProps } from '@react-navigation/material-top-tabs';
 import { Text } from 'react-native-paper';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, ScaledSize, StyleSheet, useWindowDimensions, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import OffersTontine from '../../screens/offersTontine';
 import MyTontine from '../../screens/myTontine';
+import { baseStyles } from '../../styles/baseStyles';
 
 const Tab = createMaterialTopTabNavigator();
 
 const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, navigation }) => {
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+    
     return (
-        <View style={styles.tabBar}>
+        <View style={[styles.tabBar, {paddingHorizontal: isSmallMobile ? 50 : 40}]}>
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
                 const label = options.tabBarLabel || options.title || route.name;
@@ -43,10 +52,15 @@ const CustomTabBar: React.FC<MaterialTopTabBarProps> = ({ state, descriptors, na
                         accessibilityLabel={options.tabBarAccessibilityLabel}
                         testID={options.tabBarTestID}
                         onPress={onPress}
-                        style={[styles.tab, tabStyle]}
+                        style={[baseStyles.flexRow, baseStyles.flexCenter, styles.tab, tabStyle, {
+                            width: isSmallMobile ? width/3.5 : isMediumMobile ? width/2.6 : isLargeMobile ? height/2.4 : height/2.2,
+                            height: isSmallMobile ? height/16.5 : isMediumMobile ? height/17 : isLargeMobile ? height/19 : height/21,
+                            paddingHorizontal: isSmallMobile ? 5 : 10, marginHorizontal: isSmallMobile ? 15 : 7,
+                            borderRadius: 12,
+                        }]}
                     >
-                        <Icon name={iconName} size={24} color={isFocused ? '#FFFFFF' : '#000000'} style={styles.icon} />
-                        <Text style={textStyle}>
+                        <Icon name={iconName} size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} color={isFocused ? '#FFFFFF' : '#000000'} style={styles.icon} />
+                        <Text style={[textStyle, {fontSize: isSmallMobile ? 10 : 16}]}>
                             {label as string}
                         </Text>
                     </Pressable>
@@ -85,17 +99,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: 'transparent',
         paddingVertical: 5,
-        paddingHorizontal: 40
+        
     },
     tab: {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 10,
-        borderRadius: 12,
-        marginHorizontal: 15,
         elevation: 3, // Ajoute une élévation pour l'ombre sur Android
         shadowColor: "#000", // Ajoute une ombre pour iOS
         shadowOffset: {

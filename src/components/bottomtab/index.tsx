@@ -6,10 +6,19 @@ import Home from '../../screens/home';
 import Calendar from '../../screens/calendar';
 import TontinePage from '../../screens/TontinePage';
 import Account from '../../screens/account';
+import { ScaledSize, useWindowDimensions } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+    
     const theme = useTheme();
     return (
         <Tab.Navigator
@@ -22,7 +31,7 @@ export default function BottomTab() {
                 tabBarInactiveBackgroundColor:'#FFFFFF', 
                 tabBarStyle: { 
                     backgroundColor: theme.colors.surface ,
-                    height: 70,
+                    height: isSmallMobile ? 40 : 70,
                 },
                 tabBarItemStyle: {
                     borderRadius: 4,
@@ -35,7 +44,7 @@ export default function BottomTab() {
                 component={Home}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Icon name="magnify" color={color} size={30} />
+                        <Icon name="magnify" color={color} size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} />
                     ),
                 }}
             />
@@ -44,7 +53,7 @@ export default function BottomTab() {
                 component={Calendar}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Icon name="calendar-range" color={color} size={30} />
+                        <Icon name="calendar-range" color={color} size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} />
                     ),
                 }}
             />
@@ -53,7 +62,7 @@ export default function BottomTab() {
                 component={TontinePage}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Icon name="currency-usd" color={color} size={30} />
+                        <Icon name="currency-usd" color={color} size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} />
                     ),
                 }}
             />
@@ -62,7 +71,7 @@ export default function BottomTab() {
                 component={Account}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <Icon name="account-cog" color={color} size={30} />
+                        <Icon name="account-cog" color={color} size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} />
                     ),
                 }}
             />

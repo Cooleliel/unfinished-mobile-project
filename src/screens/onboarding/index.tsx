@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, StyleSheet, View, Dimensions, Animated } from 'react-native';
+import { Image, StyleSheet, View, Dimensions, Animated, ScaledSize, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { baseStyles } from '../../styles/baseStyles';
 import { useEffect, useRef, useState } from 'react';
@@ -33,8 +33,18 @@ function OnBoarding() {
     const topCircleOpacity = useRef(new Animated.Value(0)).current;
     const bottomCircleOpacity = useRef(new Animated.Value(0)).current;
 
+    const { width, height } : ScaledSize = useWindowDimensions();
+
     // Détecter les changements de dimension et mettre à jour en conséquence
     const [screenDimensions, setScreenDimensions] = useState({ width, height });
+
+    
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+
 
     useEffect(() => {
         // Fonction pour gérer la mise à jour des dimensions
@@ -93,7 +103,13 @@ function OnBoarding() {
                         },
                     ]}
                 />
-                <Brand />
+                <Brand 
+                    style={{
+                        width: isSmallMobile ? width/3 : isMediumMobile ? width/2 : isLargeMobile ? width : width*2, 
+                        height: isSmallMobile ? height/22 : isMediumMobile ? height/15 : isLargeMobile ? height/12 : height/9,
+                        
+                    }}
+                />
                 <Animated.View
                     style={[
                         styles.circle,
