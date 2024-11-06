@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import { Image, ImageBackground, ScaledSize, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../../constants/themes";
@@ -20,6 +20,13 @@ type DetailTontineNavigationProp = NativeStackNavigationProp<
 function DetailTontine() {
 
     const navigation = useNavigation<DetailTontineNavigationProp>();
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
     
     return(
         <SafeAreaView style={{flex: 1}}>
@@ -35,7 +42,7 @@ function DetailTontine() {
                         containerColor={COLORS.background}
                         icon={"arrow-left"}
                         iconColor={COLORS.text}
-                        size={15}
+                        size={isSmallMobile ? 16 : isMediumMobile ? 22 : isLargeMobile ? 28 : 36}
                         onPress={() => navigation.goBack()}
                         style={{
                             marginTop: '15%',
@@ -77,12 +84,12 @@ function DetailTontine() {
                                     style={{
                                         fontWeight: 'bold'
                                     }}
-                                    variant="titleLarge"
+                                    variant={isSmallMobile ? 'labelLarge' : isMediumMobile ? 'titleLarge' : 'headlineLarge'}
                                 >
                                     Tontine Maison
                                 </Text >
                                 <Text
-                                    variant="bodySmall"
+                                    variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                                     style={{
                                         color: '#2E8B57',
                                         fontWeight: 'bold'
@@ -94,8 +101,7 @@ function DetailTontine() {
 
                             <View 
                                 style={{
-                                    display: "flex",
-                                    rowGap: 10
+                                    rowGap: isSmallMobile ? 5 : 10
                                 }}
                             >
                                 <Text 
@@ -103,16 +109,16 @@ function DetailTontine() {
                                         fontWeight: 'bold',
                                         textTransform: "uppercase"
                                     }}
-                                    variant="titleMedium"
+                                    variant={isSmallMobile ? 'labelLarge' : isMediumMobile ? 'titleLarge' : 'headlineLarge'}
                                 >
                                     Description
                                 </Text>
-                                <Text variant="bodyMedium" style={{textAlign: "justify"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, iure. Fugiat rem id tenetur, officia voluptas beatae? At excepturi voluptatibus delectus. Ipsa iusto id deserunt corporis aperiam vel eligendi labore?</Text>
+                                <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'} style={{textAlign: "justify"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, iure. Fugiat rem id tenetur, officia voluptas beatae? At excepturi voluptatibus delectus. Ipsa iusto id deserunt corporis aperiam vel eligendi labore?</Text>
                             </View>
 
                             <View 
                                 style={{
-                                    rowGap: 10
+                                    rowGap: isSmallMobile ? 5 : 10
                                 }}
                             >
                                 <Text 
@@ -121,7 +127,7 @@ function DetailTontine() {
                                         textTransform: "uppercase",
                                         textAlign: "justify"
                                     }}
-                                    variant="titleMedium"
+                                    variant={isSmallMobile ? 'labelLarge' : isMediumMobile ? 'titleLarge' : 'headlineLarge'}
                                 >
                                     Participants
                                 </Text>
@@ -136,20 +142,20 @@ function DetailTontine() {
                                             alignItems: 'center'
                                         }}
                                     >
-                                        <Icon source="account" size={20} color={COLORS.primary}/>
-                                        <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 places</Text>
+                                        <Icon source="account" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} color={COLORS.primary}/>
+                                        <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'} style={{textAlign: "justify"}}>10 places</Text>
                                     </View>
-                                    <Text variant="bodyMedium" style={{textAlign: "justify"}}>10 000 / Mois</Text>
+                                    <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'} style={{textAlign: "justify"}}>10 000 / Mois</Text>
                                 </View>
 
                                 <View style={{display: 'flex', flexDirection: 'row', columnGap: 15, alignItems: 'center'}}>
-                                    <Icon source="book-open-variant" size={20} color={COLORS.primary}/>
-                                    <Text variant="bodyMedium" style={{textAlign: "justify"}}>Cliquez ici pour voir les conditions</Text>    
+                                    <Icon source="book-open-variant" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} color={COLORS.primary}/>
+                                    <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'} style={{textAlign: "justify"}}>Cliquez ici pour voir les conditions</Text>    
                                 </View>
 
                                 <View style={{display: 'flex', flexDirection: 'row', columnGap: 15, alignItems: 'center'}}>
-                                    <Icon source="map" size={20} color={COLORS.primary}/>
-                                    <Text variant="bodyMedium" style={{textAlign: "justify"}}>BOBO 2010 en face de NIBA TIC 300m Mosquee de Hadja</Text>    
+                                    <Icon source="map" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} color={COLORS.primary}/>
+                                    <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'} style={{textAlign: "justify"}}>BOBO 2010 en face de NIBA TIC 300m Mosquee de Hadja</Text>    
                                 </View>
                                 
                             </View>
@@ -164,8 +170,8 @@ function DetailTontine() {
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'space-around',
-                                width: '100%',
-                                height: '15%',
+                                width: isSmallMobile ? width/0.99 : isMediumMobile ? width/0.99 : isLargeMobile ? width/0.99 : width/0.99,
+                                height: isSmallMobile ? height/9 : isMediumMobile ? height/10 : isLargeMobile ? height/11 : height/12,
                                 paddingHorizontal: 30
                             }}
                         >
@@ -173,22 +179,22 @@ function DetailTontine() {
                                 style={{
                                     fontWeight: 'bold',
                                 }}
-                                variant="bodyLarge"
+                                variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                             >
                                 120.000 / Mois
                             </Text>
 
                             <View 
                                 style={{
-                                    width: '55%',
+                                    width: isSmallMobile ? width/1.9 : isMediumMobile ? width/2 : isLargeMobile ? width/2.1 : width/2.2,
                                     display: 'flex',
                                     flexDirection: 'row',
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}
                             >
-                                <IconButton icon="whatsapp" size={25} iconColor={COLORS.primary}/>
-                                <IconButton icon="phone" size={25} iconColor={COLORS.primary}/>
+                                <IconButton icon="whatsapp" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} iconColor={COLORS.primary}/>
+                                <IconButton icon="phone" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} iconColor={COLORS.primary}/>
                                 <Button
                                     mode="text" 
                                     buttonColor="#2E8B57"
@@ -197,8 +203,8 @@ function DetailTontine() {
                                         paddingHorizontal: 16
                                     }}
                                     textColor="#fff"
-                                    style={{borderRadius: 5}}
-                                    labelStyle={{fontWeight: 'bold'}}
+                                    style={{borderRadius: 5, height: isSmallMobile ? height/16 : isMediumMobile ? height/22 : isLargeMobile ? height/24 : height/26,}}
+                                    labelStyle={{fontWeight: 'bold', fontSize: isSmallMobile ? 11 : isMediumMobile ? 16 : isLargeMobile ? 18 : 22}}
                                     onPress={() => navigation.navigate('ConfirmationTontine')}
                                 >
                                     Participer

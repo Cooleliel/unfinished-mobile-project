@@ -3,12 +3,11 @@ import { FONTS, LAYOUT } from "../../constants/themes";
 
 export const customNumericInputStyles = StyleSheet.create({
     dimensions: {
-        width: LAYOUT.components.input.height,
-        height: LAYOUT.components.input.height,
-        borderTopRightRadius: LAYOUT.border.radius.lg,
-        borderTopLeftRadius: LAYOUT.border.radius.lg,
-        borderBottomRightRadius: LAYOUT.border.radius.lg,
-        borderBottomLeftRadius: LAYOUT.border.radius.lg,
+        
+        borderTopRightRadius: LAYOUT.border.radius.sm,
+        borderTopLeftRadius: LAYOUT.border.radius.sm,
+        borderBottomRightRadius: LAYOUT.border.radius.sm,
+        borderBottomLeftRadius: LAYOUT.border.radius.sm,
         fontSize: FONTS.sizes.xs*2,
         fontWeight: FONTS.weights.bold
     }

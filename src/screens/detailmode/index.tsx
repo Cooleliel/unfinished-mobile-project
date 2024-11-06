@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import { Image, ImageBackground, ScaledSize, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
@@ -21,6 +21,13 @@ type DetailModeNavigationProp = NativeStackNavigationProp<
 function DetailMode() {
 
     const navigation = useNavigation<DetailModeNavigationProp>();
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
     
     return(
         <SafeAreaView style={{flex: 1}}>
@@ -36,7 +43,7 @@ function DetailMode() {
                         containerColor={COLORS.background}
                         icon={"arrow-left"}
                         iconColor={COLORS.text}
-                        size={15}
+                        size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
                         onPress={() => navigation.goBack()}
                         style={{
                             marginTop: '15%',
@@ -49,8 +56,8 @@ function DetailMode() {
                             <Image
                                 source={require('../../assets/images/banner.jpg')}
                                 style={{
-                                    width: '30%', 
-                                    height: '80%',
+                                    width: isSmallMobile ? width/4 : isMediumMobile ? width/3.9 : isLargeMobile ? width/3.7 : width/3.5,
+                                    height: isSmallMobile ? height/11 : isMediumMobile ? height/10 : isLargeMobile ? height/9 : height/8,
                                     borderWidth: 2,
                                     borderColor: '#2E8B57', 
                                     borderRadius: 16
@@ -60,8 +67,8 @@ function DetailMode() {
                             <Image
                                 source={require('../../assets/images/banner.jpg')}
                                 style={{
-                                    width: '30%', 
-                                    height: '80%',
+                                    width: isSmallMobile ? width/4 : isMediumMobile ? width/3.9 : isLargeMobile ? width/3.7 : width/3.5,
+                                    height: isSmallMobile ? height/11 : isMediumMobile ? height/10 : isLargeMobile ? height/9 : height/8,
                                     borderWidth: 2,
                                     borderColor: '#2E8B57', 
                                     borderRadius: 16
@@ -70,13 +77,13 @@ function DetailMode() {
                             />
                             <View
                                 style={{
-                                    width: '30%', 
-                                    height: '80%', 
+                                    width: isSmallMobile ? width/4 : isMediumMobile ? width/3.9 : isLargeMobile ? width/3.7 : width/3.5,
+                                    height: isSmallMobile ? height/11 : isMediumMobile ? height/10 : isLargeMobile ? height/9 : height/8,
                                     borderRadius: 16,
                                     backgroundColor: 'orange'
                                 }}
                             >
-                                <Text variant="headlineMedium" style={{margin: 'auto', fontWeight: 'bold', color: '#ffffff'}}>
+                                <Text variant={isSmallMobile ? 'bodyLarge' : isMediumMobile ? 'headlineLarge' : 'displayLarge'} style={{margin: 'auto', fontWeight: 'bold', color: '#ffffff'}}>
                                     +10
                                 </Text>
                             </View>
@@ -106,12 +113,12 @@ function DetailMode() {
                                     style={{
                                         fontWeight: 'bold'
                                     }}
-                                    variant="titleMedium"
+                                    variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'bodyLarge' : 'headlineLarge'}
                                 >
                                     Immeuble BOGO / BOBO DSS | BF
                                 </Text >
                                 <Text
-                                    variant="bodySmall"
+                                    variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                                     style={{
                                         color: '#2E8B57',
                                         fontWeight: 'bold'
@@ -127,11 +134,11 @@ function DetailMode() {
                                         fontWeight: 'bold',
                                         textTransform: "uppercase"
                                     }}
-                                    variant="titleMedium"
+                                    variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'bodyLarge' : 'headlineLarge'}
                                 >
                                     Description
                                 </Text>
-                                <Text variant="bodyMedium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, iure. Fugiat rem id tenetur, officia voluptas beatae? At excepturi voluptatibus delectus. Ipsa iusto id deserunt corporis aperiam vel eligendi labore?</Text>
+                                <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, iure. Fugiat rem id tenetur, officia voluptas beatae? At excepturi voluptatibus delectus. Ipsa iusto id deserunt corporis aperiam vel eligendi labore?</Text>
                             </View>
 
                             <View>
@@ -140,17 +147,17 @@ function DetailMode() {
                                         fontWeight: 'bold',
                                         textTransform: "uppercase"
                                     }}
-                                    variant="titleMedium"
+                                    variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'bodyLarge' : 'headlineLarge'}
                                 >
                                     Adresse
                                 </Text>
                                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', columnGap: 20}}>
-                                    <Icon source="map" size={20} color={COLORS.primary}/>
-                                    <Text variant="bodyMedium">Lorem ipsum dolor sit amet consectetur adipisicing elit.</Text>
+                                    <Icon source="map" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} color={COLORS.primary}/>
+                                    <Text variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Text>
                                 </View>
                                 <View style={{display: 'flex'}}>
                                     <Text 
-                                        variant="bodyLarge" 
+                                        variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                                         style={{
                                             color: '#2E8B57',
                                             fontWeight: 'bold',
@@ -162,8 +169,8 @@ function DetailMode() {
                                     <Image
                                         source={require('../../assets/images/maps.webp')}
                                         style={{
-                                            width: '100%', 
-                                            height: 125,
+                                            width: isSmallMobile ? width/1.28 : isMediumMobile ? width/1.25 : isLargeMobile ? width/1.23 : width/1.21,
+                                            height: isSmallMobile ? height/7 : isMediumMobile ? height/6 : isLargeMobile ? height/5 : height/4,
                                             borderRadius: 8
                                         }}
                                         resizeMode="cover"
@@ -180,11 +187,11 @@ function DetailMode() {
                                     flexDirection: 'row',
                                     alignItems: 'center',
                                     justifyContent: 'space-around',
-                                    width: '110%',
+                                    width: isSmallMobile ? width/1.15 : isMediumMobile ? width/1.13 : isLargeMobile ? width/1.11 : width/1.09,
+                                    height: isSmallMobile ? height/14 : isMediumMobile ? height/16 : isLargeMobile ? height/18 : height/20,
                                     elevation: 3,
                                     padding: 8,
                                     borderRadius: 8,
-                                    marginVertical: 0,
                                     marginHorizontal: 25
                                 }}
                             >
@@ -192,22 +199,22 @@ function DetailMode() {
                                     style={{
                                         fontWeight: 'bold',
                                     }}
-                                    variant="bodyLarge"
+                                    variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                                 >
                                     120.000 / Mois
                                 </Text>
 
                                 <View 
                                     style={{
-                                        width: '55%',
+                                        width: isSmallMobile ? width/1.9 : isMediumMobile ? width/2 : isLargeMobile ? width/2.1 : width/2.2,
                                         display: 'flex',
                                         flexDirection: 'row',
                                         alignItems: 'center',
                                         justifyContent: 'center'
                                     }}
                                 >
-                                    <IconButton icon="whatsapp" size={25} iconColor={COLORS.primary}/>
-                                    <IconButton icon="phone" size={25} iconColor={COLORS.primary}/>
+                                    <IconButton icon="whatsapp" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} iconColor={COLORS.primary}/>
+                                    <IconButton icon="phone" size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40} iconColor={COLORS.primary}/>
                                     <Button
                                         mode="text" 
                                         buttonColor="#2E8B57"
@@ -216,8 +223,8 @@ function DetailMode() {
                                             paddingHorizontal: 16
                                         }}
                                         textColor="#fff"
-                                        style={{borderRadius: 5}}
-                                        labelStyle={{fontWeight: 'bold'}}
+                                        style={{borderRadius: 5, height: isSmallMobile ? height/16 : isMediumMobile ? height/22 : isLargeMobile ? height/24 : height/26,}}
+                                        labelStyle={{fontWeight: 'bold', fontSize: isSmallMobile ? 11 : isMediumMobile ? 16 : isLargeMobile ? 18 : 22}}
                                         onPress={() => navigation.replace('Congratulations')}
                                     >
                                         Reserver

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, ScaledSize, StyleSheet, TouchableOpacity, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Avatar, Button, Icon, Text, TextInput } from "react-native-paper";
 import { CustomHeader } from "../../components/customHeader";
@@ -32,10 +32,17 @@ function Profile() {
         console.log('Nouvelle photo de profil sélectionnée:', uri);
     };
 
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+
     return(
         <SafeAreaView style={[baseStyles.container, {
-            paddingVertical: 30,
-            rowGap: 25
+            paddingVertical: 15,
+            rowGap: 15
         }]}>
             <CustomHeader
                 title="Profil"
@@ -45,10 +52,10 @@ function Profile() {
             />
             <View
                 style={[baseStyles.flexRow, {
-                    paddingVertical: 20,
+                    paddingVertical: 15,
                     paddingHorizontal: 50,
                     alignItems: 'center',
-                    columnGap: 20
+                    columnGap: 5
                 }]}
             >
                 <TouchableOpacity
@@ -60,7 +67,7 @@ function Profile() {
                 >
                     <Avatar.Image
                         source={require('../../assets/images/avatar.webp')}
-                        size={100}
+                        size={isSmallMobile ? 60 : isMediumMobile ? 80 : 100}
                     />
                     <View
                         style={[{
@@ -75,7 +82,7 @@ function Profile() {
                     >
                         <Icon 
                             source='camera'
-                            size={25}
+                            size={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
 
                         />
                     </View>
@@ -106,7 +113,11 @@ function Profile() {
                     autoCapitalize="none" 
                     autoComplete="off" 
                     autoCorrect={false} 
-                    contentStyle={{textAlign: "center", fontSize: 20, fontWeight: 'bold'}}
+                    contentStyle={{
+                        textAlign: "center", 
+                        fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24,
+                        fontWeight: 'bold'
+                    }}
                     mode="flat" 
                     placeholder="Noella DABIRE" 
                 />
@@ -118,7 +129,6 @@ function Profile() {
                     marginTop: '-10%',
                     paddingVertical: 20,
                     paddingHorizontal: 50,
-                    display: 'flex',
                     rowGap: 10
                 }}
             >
@@ -145,6 +155,10 @@ function Profile() {
                             borderBottomLeftRadius: 0,
                             backgroundColor: COLORS.gray[50]
                         }}
+                        contentStyle={{
+                            fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24
+                        }}
+                        iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
                         placeholderColor={COLORS.text}                
                     />
                     <CustomTextInput
@@ -161,6 +175,10 @@ function Profile() {
                             borderBottomLeftRadius: 0,
                             backgroundColor: COLORS.gray[50]
                         }}
+                        contentStyle={{
+                            fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24
+                        }}
+                        iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
                         placeholderColor={COLORS.text}                
                     />
                     <CustomTextInput
@@ -178,12 +196,18 @@ function Profile() {
                             borderBottomLeftRadius: 0,
                             backgroundColor: COLORS.gray[50]
                         }}
+                        contentStyle={{
+                            fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24
+                        }}
+                        iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
                         placeholderColor={COLORS.text}                
                     />
                 </View>
                 <CustomContainedButton
                     label="Modifier"
                     icon="pencil"
+                    styles={{height: isSmallMobile ? height/16 : isMediumMobile ? height/14 : isLargeMobile ? height/12 : height/10}}
+                    labelStyle={{fontSize: isSmallMobile ? 14 : isMediumMobile ? 20 : isLargeMobile ? 18 : 26}}
                 />
             </View>
         </SafeAreaView>

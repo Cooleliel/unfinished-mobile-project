@@ -1,9 +1,9 @@
 import React from "react";
-import { FlatList, Image, View } from "react-native";
+import { FlatList, Image, ScaledSize, useWindowDimensions, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { baseStyles } from "../../styles/baseStyles";
-import { CustomTextButton } from "../customButton";
+import { CustomContainedButton, CustomTextButton } from "../customButton";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 
@@ -49,6 +49,13 @@ const Generic = ({ item } : {item: TabData}) => {
 
     const navigation = useNavigation<GenericNavigationProp>();
 
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+
     const   renderImageCard = () => (
         <View 
             style={{
@@ -59,8 +66,8 @@ const Generic = ({ item } : {item: TabData}) => {
                 source={require('../../assets/images/immeuble.jpeg')}
                 resizeMode="cover"
                 style={{
-                    width: 250,
-                    height: 150,                            
+                    width: isSmallMobile ? width/1.8 : isMediumMobile ? width/1.5 : isLargeMobile ? width/1.3 : width/1.1,
+                    height: isSmallMobile ? height/6 : isMediumMobile ? height/5 : isLargeMobile ? height/4.5 : height/4,                            
                     borderRadius:16
                 }}
             />
@@ -68,7 +75,8 @@ const Generic = ({ item } : {item: TabData}) => {
                 style={{
                     position: 'absolute',
                     top: '45%',
-                    width: 250,
+                    width: isSmallMobile ? width/1.8 : isMediumMobile ? width/1.5 : isLargeMobile ? width/1.3 : width/1.1,
+                    height: isSmallMobile ? height/8 : isMediumMobile ? height/7 : isLargeMobile ? height/7.5 : height/8, 
                     borderRadius:16,
                     backgroundColor: '#FFFFFF',
                     display: 'flex',
@@ -85,21 +93,24 @@ const Generic = ({ item } : {item: TabData}) => {
                     <Text
                         style={{
                             fontWeight: 'bold',
+                            fontSize: isSmallMobile ? 14 : isMediumMobile ? 22 : 32
                         }}
-                        variant="bodyLarge"
+                        
                     >
                         Immeuble BOGO
                     </Text>
-                    <Text variant="bodyMedium">Bobo-Dioulasso</Text>
-                    <Text variant="bodyMedium" style={{fontWeight: 'bold'}}>120 000 FCFA / Mois</Text>
+                    <Text style={{fontSize: isSmallMobile ? 11 : isMediumMobile ? 18 : 24}}>Bobo-Dioulasso</Text>
+                    <Text style={{fontSize: isSmallMobile ? 11 : isMediumMobile ? 18 : 24, fontWeight: 'bold'}}>120 000 FCFA / Mois</Text>
                 </View>
                 <CustomTextButton
                     label="Voir"
                     labelStyle={{
                         color: '#ffffff',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        fontSize: isSmallMobile ? 11 : isMediumMobile ? 16 : isLargeMobile ? 18 : 22
                     }}
                     styles={{
+                        height: isSmallMobile ? height/16 : isMediumMobile ? height/22 : isLargeMobile ? height/24 : height/26,
                         backgroundColor: '#2E8B57',
                         borderRadius: 8
                     }}
@@ -114,7 +125,7 @@ const Generic = ({ item } : {item: TabData}) => {
         <SafeAreaView
             style={[baseStyles.container, {
                 rowGap: 10,
-                paddingVertical: 10,
+                paddingVertical: isSmallMobile ? 5 : 10,
             }]}
         >
             
@@ -123,7 +134,7 @@ const Generic = ({ item } : {item: TabData}) => {
                     fontWeight: 'bold',
                     marginHorizontal: 30
                 }}
-                variant="titleLarge"
+                variant={isSmallMobile ? 'bodyMedium' : isMediumMobile ? 'headlineSmall' : 'displayMedium'}
             >
                 Disponible
             </Text>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import { Image, ImageBackground, ScaledSize, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Button, IconButton, Text, Icon } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "../../constants/themes";
@@ -8,6 +8,13 @@ import { useNavigation } from "@react-navigation/native";
 function DetailMaTontine() {
 
     const navigation = useNavigation();
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
     
     return(
         <SafeAreaView style={{flex: 1}}>
@@ -22,7 +29,7 @@ function DetailMaTontine() {
                         containerColor={COLORS.background}
                         icon={"arrow-left"}
                         iconColor={COLORS.text}
-                        size={15}
+                        size={isSmallMobile ? 16 : isMediumMobile ? 22 : isLargeMobile ? 28 : 36}
                         onPress={() => navigation.goBack()}
                         style={{
                             marginTop: '15%',

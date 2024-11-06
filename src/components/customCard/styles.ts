@@ -18,23 +18,18 @@ export const customCardStyles = StyleSheet.create({
         shadowRadius: 3.84,
     },
     cardImage: {
-        width: '100%',
-        height: 120,
         borderRadius: 10,
         marginBottom: 10,
     },
     cardTitle: {
-        fontSize: 16,
         fontWeight: 'bold',
         marginBottom: 5,
     },
     cardDescription: {
-        fontSize: 14,
         color: '#666',
         marginBottom: 5,
     },
     cardPrice: {
-        fontSize: 16,
         fontWeight: 'bold',
         color: '#2E8B57',
         marginBottom: 10,

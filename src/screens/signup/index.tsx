@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, ScaledSize, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RNPickerSelect from 'react-native-picker-select';
@@ -30,25 +30,39 @@ function SignUp() {
     const navigation = useNavigation<SignUpNavigationProp>();
     const [checkbox, setCheckbox] = useState<boolean>(false);
 
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
+
     return(
         <SafeAreaView style={[baseStyles.container, {padding: 50}]}>
-            <View style={{flex: 0.3}}>
-                <Text variant="displaySmall" style={{color: '#2E8B57', fontWeight: 'bold'}}>
+            <View style={{flexGrow: 0.2}}>
+                <Text variant={isSmallMobile ? 'headlineSmall' : isMediumMobile ? 'headlineLarge' : 'displayLarge'} style={{color: '#2E8B57', fontWeight: 'bold'}}>
                     Akwaba sur
                 </Text>
-                <Brand/>
-                <Text variant="titleLarge" style={{fontWeight: 600}}>Créez  un nouveau compte</Text>
+                <Brand
+                    style={{
+                        width: isSmallMobile ? width/3 : isMediumMobile ? width/2 : isLargeMobile ? width : width*2, 
+                        height: isSmallMobile ? height/22 : isMediumMobile ? height/15 : isLargeMobile ? height/12 : height/9,
+                        
+                    }}
+                />
+                <Text variant={isSmallMobile ? 'bodyMedium' : isMediumMobile ? 'headlineSmall' : 'displayMedium'} style={{fontWeight: 600}}>Créez  un nouveau compte</Text>
             </View>
-            <View style={{flex: 0.7}}>
+            <View style={{flexGrow: 0.6}}>
 
-                <View>
-                    <CustomTextInput
-                        icon="account"
-                        placeholder="Nom complet"
-                    />
-                </View>
+                <CustomTextInput
+                    icon="account"
+                    placeholder="Nom complet"
+                    containerStyle={{height: isSmallMobile ? height/12 : isMediumMobile ? height/13 : isLargeMobile ? height/15 : height/17,}}
+                    iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
+                    contentStyle={{fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
+                />
 
-                <View style={[baseStyles.flexRow, {justifyContent: 'space-between', alignItems: 'center'}]}>
+                <View style={[baseStyles.flexRow, {justifyContent: 'center', alignItems: 'center', columnGap: 10}]}>
                     <Dropdown
                         data={[
                             { label: '+220', value: '220' },
@@ -73,8 +87,8 @@ function SignUp() {
                         valueField={'value'}
                         style={{
                             backgroundColor: 'transparent',
-                            width: 100,
-                            height: 60,
+                            width: isSmallMobile ? width/4 : isMediumMobile ? width/4 : isLargeMobile ? height/6 : height/6,
+                            height: isSmallMobile ? height/11.5 : isMediumMobile ? height/13.5 : isLargeMobile ? height/15.5 : height/17.5,
                             borderWidth: 2, 
                             borderColor: '#2E8B57',
                             borderRadius: 8,
@@ -107,7 +121,10 @@ function SignUp() {
                     <CustomTextInput
                         placeholder="xx xx xx xx" 
                         icon="phone"
-                        containerStyle={{width: 200}}
+                        containerStyle={{width: isSmallMobile ? width/2.3 : isMediumMobile ? width/2 : isLargeMobile ? width/1.77 : width/1.74,
+                            height: isSmallMobile ? height/12 : isMediumMobile ? height/13 : isLargeMobile ? height/15 : height/17,}}
+                        iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
+                        contentStyle={{fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                     />
                 </View>
 
@@ -115,6 +132,9 @@ function SignUp() {
                     <CustomTextInput
                         icon="email-outline"
                         placeholder="sangimmo@gmail.com"
+                        containerStyle={{height: isSmallMobile ? height/12 : isMediumMobile ? height/13 : isLargeMobile ? height/15 : height/17,}}
+                        iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
+                        contentStyle={{fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                     />
                 </View>
 
@@ -122,6 +142,9 @@ function SignUp() {
                     <CustomTextInput
                         placeholder="Code de securite" 
                         icon="lock"
+                        containerStyle={{height: isSmallMobile ? height/12 : isMediumMobile ? height/13 : isLargeMobile ? height/15 : height/17,}}
+                        iconSize={isSmallMobile ? 20 : isMediumMobile ? 26 : isLargeMobile ? 32 : 40}
+                        contentStyle={{fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                     />
                 </View>
 
@@ -133,11 +156,14 @@ function SignUp() {
                         label="J'ai lu et j'acceptes les termes."
                         icon={checkbox ? 'checkbox-marked' : 'checkbox-blank-outline'}
                         onPress={() => setCheckbox(!checkbox)}
+                        labelStyle={{fontSize: isSmallMobile ? 11 : isMediumMobile ? 16 : isLargeMobile ? 18 : 22}}
                     />
                 </View>
                 <CustomContainedButton
                     label="Inscription"
                     onPress={() => navigation.navigate('Check')}
+                    styles={{height: isSmallMobile ? height/13 : isMediumMobile ? height/12 : isLargeMobile ? height/11 : height/10}}
+                    labelStyle={{fontSize: isSmallMobile ? 14 : isMediumMobile ? 20 : isLargeMobile ? 18 : 26}}
                 />
                 <View style={[baseStyles.flexRow, {alignItems: "center", justifyContent: "center"}]}>
                     <Text style={{fontWeight: "bold"}}>Déjà inscrit ?</Text>
@@ -145,6 +171,7 @@ function SignUp() {
                         label="Connectez-vous"
                         textColor={COLORS.primary}
                         onPress={() => navigation.navigate('SignIn')}
+                        labelStyle={{fontSize: isSmallMobile ? 11 : isMediumMobile ? 16 : isLargeMobile ? 18 : 22}}
                     />
                 </View>
             </View>

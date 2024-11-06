@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, ScaledSize, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Avatar, Button, Icon, Text } from "react-native-paper";
 import { baseStyles } from "../../styles/baseStyles";
@@ -22,11 +22,18 @@ type OnBoardingNavigationProp = NativeStackNavigationProp<
 function Account() {
 
     const navigation = useNavigation<OnBoardingNavigationProp>();
+
+    const { width, height } : ScaledSize = useWindowDimensions();
+
+    // Définition des breakpoints
+    const isSmallMobile = width >= 320 && width < 374;
+    const isMediumMobile = width >= 375 && width < 424;
+    const isLargeMobile = width >= 425 && width < 1024;
     
     return(
         <SafeAreaView style={[baseStyles.container, {
-            paddingVertical: 30,
-            rowGap: 25
+            paddingVertical: 15,
+            rowGap: 15
         }]}>
             <CustomHeader
                 icon="arrow-left"
@@ -36,10 +43,10 @@ function Account() {
 
             <View
                 style={[baseStyles.flexRow, {
-                    paddingVertical: 20,
+                    paddingVertical: 15,
                     paddingHorizontal: 50,
                     alignItems: 'center',
-                    columnGap: 20
+                    columnGap: 10
                 }]}
             >
                 <View
@@ -51,13 +58,13 @@ function Account() {
                 >
                     <Avatar.Image
                         source={require('../../assets/images/avatar.webp')}
-                        size={70}
+                        size={isSmallMobile ? 40 : isMediumMobile ? 60 : 80}
                     />
                 </View>
                 
                 <View>
                     <Text 
-                        variant="bodyLarge"
+                        variant={isSmallMobile ? 'bodySmall' : isMediumMobile ? 'bodyMedium' : 'bodyLarge'}
                         style={{
                             fontWeight: 'bold',
                             color: COLORS.text, 
@@ -66,7 +73,14 @@ function Account() {
                     >
                         Noella DABIRE
                     </Text>
-                    <View style={{backgroundColor: COLORS.primary, width: '115%', height: 5, borderRadius: 99}}></View>
+                    <View 
+                        style={{
+                            backgroundColor: COLORS.primary, 
+                            width: '115%', 
+                            height: 5, 
+                            borderRadius: 99
+                        }}
+                    ></View>
 
                 </View>
 
@@ -75,14 +89,15 @@ function Account() {
             <View
                 style={{
                     marginTop: '-10%',
-                    paddingVertical: 20,
-                    paddingHorizontal: 50,
-                    rowGap: 10
+                    paddingVertical: isSmallMobile ? 25 : 50,
+                    paddingHorizontal: 40,
+                    rowGap: isSmallMobile ? 10 : 30
                 }}
             >
 
                 <View>
                     <Text
+                        variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                         style={{
                             fontWeight: 'bold'
                         }}
@@ -94,20 +109,21 @@ function Account() {
                             backgroundColor: COLORS.background,
                             padding: 10,
                             elevation: 0.5,
-                            borderRadius: 8
+                            borderRadius: 8,
+                            rowGap: isSmallMobile ? 10 : 20
                         }}
                     >
                         <CustomTextButton
                             label="Appelez le service client"
                             icon="phone"
-                            contentStyle={{cursor: 'pointer', alignItems: 'center', justifyContent: 'flex-start', columnGap: 20}}
-                            labelStyle={{fontWeight: 'bold', color: COLORS.text}}
+                            contentStyle={{alignItems: 'center', justifyContent: 'flex-start', columnGap: 10}}
+                            labelStyle={{fontWeight: 'bold', color: COLORS.text, fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                         />
                         <CustomTextButton
                             label="Ecrivez au service client"
                             icon="message"
-                            contentStyle={{cursor: 'pointer', alignItems: 'center', justifyContent: 'flex-start', columnGap: 20}}
-                            labelStyle={{fontWeight: 'bold', color: COLORS.text}}
+                            contentStyle={{ alignItems: 'center', justifyContent: 'flex-start', columnGap: 10}}
+                            labelStyle={{fontWeight: 'bold', color: COLORS.text, fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                         />
                         
                     </View>
@@ -116,6 +132,7 @@ function Account() {
 
                 <View>
                     <Text
+                        variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                         style={{
                             fontWeight: 'bold'
                         }}
@@ -127,14 +144,15 @@ function Account() {
                             backgroundColor: COLORS.background,
                             padding: 10,
                             elevation: 0.5,
-                            borderRadius: 8
+                            borderRadius: 8,
+                            rowGap: isSmallMobile ? 10 : 20
                         }}
                     >
                         <CustomTextButton
                             label="Voir le profil"
                             icon="account"
-                            contentStyle={{cursor: 'pointer', alignItems: 'center', justifyContent: 'flex-start', columnGap: 20}}
-                            labelStyle={{fontWeight: 'bold', color: COLORS.text}}
+                            contentStyle={{alignItems: 'center', justifyContent: 'flex-start', columnGap: 10}}
+                            labelStyle={{fontWeight: 'bold', color: COLORS.text, fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                             onPress={() => navigation.navigate('Profile')}
                         />
                     </View>
@@ -143,6 +161,7 @@ function Account() {
 
                 <View>
                     <Text
+                        variant={isSmallMobile ? 'labelSmall' : isMediumMobile ? 'labelMedium' : 'labelLarge'}
                         style={{
                             fontWeight: 'bold'
                         }}
@@ -154,20 +173,21 @@ function Account() {
                             backgroundColor: COLORS.background,
                             padding: 10,
                             elevation: 0.5,
-                            borderRadius: 8
+                            borderRadius: 8,
+                            rowGap: isSmallMobile ? 10 : 20
                         }}
                     >
                         <CustomTextButton
                             label="Termes d'utlisations"
                             icon="book-open-variant"
-                            contentStyle={{cursor: 'pointer', alignItems: 'center', justifyContent: 'flex-start', columnGap: 20}}
-                            labelStyle={{fontWeight: 'bold', color: COLORS.text}}
+                            contentStyle={{alignItems: 'center', justifyContent: 'flex-start', columnGap: 10}}
+                            labelStyle={{fontWeight: 'bold', color: COLORS.text, fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                         />
                         <CustomTextButton
                             label="Confidentialite de l'application"
                             icon="shield-account-variant"
-                            contentStyle={{cursor: 'pointer', alignItems: 'center', justifyContent: 'flex-start', columnGap: 20}}
-                            labelStyle={{fontWeight: 'bold', color: COLORS.text}}
+                            contentStyle={{alignItems: 'center', justifyContent: 'flex-start', columnGap: 10}}
+                            labelStyle={{fontWeight: 'bold', color: COLORS.text, fontSize: isSmallMobile ? 12 : isMediumMobile ? 18 : isLargeMobile ? 20 : 24}}
                         />
                         
                     </View>
